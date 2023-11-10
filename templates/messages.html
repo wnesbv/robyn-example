@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+{% if request.queries["msg"] %}
+<div class="container">
+<h1 class="lead my-3">messages</h1> 
+<span>
+    messages: {{ request.queries["msg"] | replace("%20", " ", )  }}
+</span>
+<hr>
+<a class="page-link my-3" href="/">home</a> 
+</div>
+{% endif %}
+{% endblock %}

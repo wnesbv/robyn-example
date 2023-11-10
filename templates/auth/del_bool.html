@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %} del img {{ i.email }}{% endblock %}
+
+{% block content %}
+
+<h1 class="lead my-3">del img <small>user: {{ i.email }}</small></h1>
+
+<form class="card p-3" method="POST">
+
+    {% if i.file %}
+    <figure class="list-group-item list-group-item-danger d-inline-block p-3">
+        <figcaption><sup>{{ i.file }}</sup></figcaption>
+
+        <img width="128" src="{{ i.file }}" />
+        <input
+            type="checkbox"
+            name="del_bool"
+            class="ms-2 form-check-input"
+        />
+        <sup class="m-2">delete</sup>
+    </figure>
+    {% endif %}
+
+{% if all_img %}
+{% for i in all_img %}
+    <figure class="d-flex">
+    <figcaption><sup>{{ i }}</sup></figcaption>
+    <img width="120" class="shadow-sm m-2" src="/{{ i }}" alt="img">
+    <input
+        type="checkbox"
+        name="del_img"
+        value="{{ i }}"
+        class="ms-2 form-check-input bg-danger"
+    />
+    <sup class="m-2">delete</sup>
+    </figure>
+{% endfor %}
+{% endif %}
+
+    <div class="m-2">
+        <button type="submit" class="btn btn-outline-primary btn-sm">
+            submit
+        </button>
+    </div>
+</form>
+
+{% endblock %}

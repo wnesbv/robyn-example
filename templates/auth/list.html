@@ -1,0 +1,59 @@
+
+{% extends "base.html" %}
+{% block title %} list user {% endblock %}
+
+{% block content %}
+
+<h1 class="lead my-3">list user..</h1>
+
+<div class="p-3 bg-light">
+    <h2 class="lead">list user..</h2>
+    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+</div>
+
+<div class="flex_start">
+{% if result %}
+{% for i in result %}
+
+<div class="card mt-2 me-1">
+
+    <ul class="card-header list-group list-group-horizontal">
+        <li class="list-group-item pt-3">
+            <sup class="float-start">id:</sup>
+            <span>{{ i.id }}</span>
+        </li>
+        <li class="list-group-item pt-3">
+            <sup class="float-start">name:</sup>
+            <span>{{ i.name }}</span>
+        </li>
+    </ul>
+
+    <ul class="list-group list-group-flush">
+
+        <li class="list-group-item pt-3">
+            <sup class="float-start">email:</sup>
+            <p>{{ i.email }}</p>
+        </li>
+        {% include "created_modified.html" %}
+    </ul>
+
+    {% if i.file %}
+    <figure>
+    <img width="120" class="shadow-sm m-2" src="{{ i.file }}" alt="img">
+    </figure>
+    {% endif %}
+
+    <div class="card-footer">
+        <a class="btn btn-outline-primary btn-sm" href="/account/details/{{ i.id }}" role="button">view details &raquo;</a>
+    </div>
+
+</div>
+
+{% endfor %}
+
+    {% else %}
+    <span class="mt-5">no information available</span>
+{% endif %}
+</div>
+
+{% endblock %}

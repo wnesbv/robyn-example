@@ -1,0 +1,70 @@
+
+.num{
+    width: 20%;
+    overflow: hidden;
+    float: right;
+}
+.chat{
+    width: 80%;
+}
+.ch_img{
+    width: 100%;
+}
+.js_chat{
+    font-size: 75%;
+}
+.js_chat{
+    word-wrap: break-word;;
+}
+
+@media (max-width:1024px){
+    .num{
+        min-width: 100%;
+    }
+    .chat{
+        width: 100%;
+    }
+}
+
+.flex_cont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    align-content: flex-start;
+}
+.flex_start{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: stretch;
+}
+.base_main{
+    min-height: 80vh;
+}
+.li_comment{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+}
+
+.num hr{
+    margin: 0;
+}
+html,
+body{
+    overflow-x: hidden;
+}
+li{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+}
