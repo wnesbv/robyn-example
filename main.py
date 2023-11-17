@@ -5,9 +5,9 @@ from robyn import (
     Response,
     Robyn,
     jsonify,
-    serve_file,
-    serve_html,
 )
+
+from chat import chat
 
 # ...
 #from db_startup.db import on_app_startup
@@ -74,6 +74,7 @@ def main():
     app.add_response_header("server", "robyn")
     app.startup_handler(startup_handler)
     app.include_router(auth)
+    app.include_router(chat)
     app.start(port=8080)
 
 

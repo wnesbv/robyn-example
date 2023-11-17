@@ -1,0 +1,69 @@
+
+{% extends "base.html" %}
+{% block title %} chat message {% endblock %}
+
+{% block content %}
+
+<h1 class="lead my-3">all chat..</h1>
+
+<div class="chat card mt-2">
+    <div class="card-header">
+    <h2 class="lead mt-2">all chat group</h2>
+    </div>
+
+    <div class="p-3"> 
+        <div id="msg"></div>
+    </div>
+
+    <div class="card-body mb-3">   
+        <form class="card p-2 mb-1" method="POST">
+            <sup class="mt-2 ms-2">message</sup>
+            <div class="card-body">
+                <input name="message" type="text" id="messageinput" class="form-control" value="Lorem ipsum">
+            </div>
+
+            <div class="card-footer">
+                <input id="btnmsg"  type="button" value="send" class="btn btn-sm btn-outline-primary my-2">
+            </div>
+
+        </form>
+
+        <div id="target"></div>
+    </div>
+
+</div>
+
+
+<script>
+
+    let add_msg = document.querySelector("#msg");
+
+    let btnmsg = document.querySelector("#btnmsg");
+    let messageinput = document.getElementById("messageinput");
+
+    let ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+    let websocket_str = `${ws_scheme}://${window.location.host}/chat/item`;
+    let ws = new WebSocket(websocket_str);
+
+
+    ws.onmessage = function (event) {
+
+        let data = JSON.parse(event.data);
+
+        add_msg.innerHTML +=
+            '<div class="shadow w-75 list-group-item float-end my-1">' +
+            data.message +
+            '</div>'
+    };
+    
+    btnmsg.addEventListener("click", (event) => {
+        message = messageinput.value;
+        ws.send(JSON.stringify({"message": message}));
+        event.preventDefault();
+        messageinput.value = "";
+    });
+
+
+</script>
+
+{% endblock %}
