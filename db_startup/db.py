@@ -8,6 +8,7 @@ import json, string, secrets, time
 from passlib.hash import pbkdf2_sha1
 
 from account.models import User
+from chat.models import MessageChat
 
 from db_config.storage_config import Base, engine, async_session
 
@@ -75,6 +76,18 @@ async def on_app_startup() -> None:
                         is_admin=False,
                         is_active=True,
                         email_verified=True,
+                        created_at=datetime.now(),
+                    ),
+                    MessageChat(
+                        message="message 01 for one",
+                        owner=1,
+                        owner_email="one@example.com",
+                        created_at=datetime.now(),
+                    ),
+                    MessageChat(
+                        message="message 02 for two",
+                        owner=2,
+                        owner_email="two@example.com",
                         created_at=datetime.now(),
                     ),
                 ]

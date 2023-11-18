@@ -2,7 +2,6 @@ robyn
 sqlalchemy[asyncio]
 aiosqlite
 pydantic
-aiofiles
 passlib
 psycopg2-binary
 python-decouple

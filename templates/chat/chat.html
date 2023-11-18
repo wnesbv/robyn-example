@@ -6,11 +6,18 @@
 
 <h1 class="lead my-3">all chat..</h1>
 
-<div class="chat card mt-2">
-    <div class="card-header">
-    <h2 class="lead mt-2">all chat group</h2>
-    </div>
+<div class="card">
+    {% for i in result %}
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <sup class="float-end mt-2">{{ i.owner_email }}</sup>
+            {{ i.message }}
+        </li>
+    </ul>
+    {% endfor %}
 
+    <hr>
+    
     <div class="p-3"> 
         <div id="msg"></div>
     </div>
@@ -39,6 +46,7 @@
     let add_msg = document.querySelector("#msg");
 
     let btnmsg = document.querySelector("#btnmsg");
+    let user = document.getElementById("#user");
     let messageinput = document.getElementById("messageinput");
 
     let ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
@@ -51,14 +59,17 @@
         let data = JSON.parse(event.data);
 
         add_msg.innerHTML +=
-            '<div class="shadow w-75 list-group-item float-end my-1">' +
-            data.message +
-            '</div>'
+            '<div class="shadow w-75 list-group-item float-end my-1">' + '<sup class="mt-2 m-2">' + data.owner_email + '</sup>' +  data.message + '</div>'
     };
     
     btnmsg.addEventListener("click", (event) => {
+        user = "{{user.email}}";
+        user_id = "{{user.user_id}}";
         message = messageinput.value;
-        ws.send(JSON.stringify({"message": message}));
+
+        ws.send(JSON.stringify(
+            {"message": message, "owner": user_id, "owner_email": user}
+        ));
         event.preventDefault();
         messageinput.value = "";
     });
